@@ -50,7 +50,26 @@ public class EditPetKeepersTable {
         String update="UPDATE petkeepers SET personalpage='"+personalpage+"' WHERE username = '"+username+"'";
         stmt.executeUpdate(update);
     }
-    
+
+    public void printPetKeeperDetailsToPage(String username, String password) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM petkeepers WHERE username = '" + username + "' AND password='" + password + "'");
+            while (rs.next()) {
+
+                System.out.println("===Result===");
+                DB_Connection.printResults(rs);
+            }
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+
     public void printPetKeeperDetails(String username, String password) throws SQLException, ClassNotFoundException{
          Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
