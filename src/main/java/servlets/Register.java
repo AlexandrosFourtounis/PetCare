@@ -17,11 +17,13 @@ import database.tables.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author thead
  */
+@WebServlet(name = "Register", urlPatterns = {"/Register"})
 public class Register extends HttpServlet {
 
     /**
