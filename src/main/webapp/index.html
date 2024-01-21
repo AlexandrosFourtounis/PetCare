@@ -1,82 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-  <title>PetCare</title>
-</head>
-<body>
+        <title>PetCare</title>
+    </head>
+    <body>
 
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="#" class="logo">PetCare</a>
-      <ul class="nav-list">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About Us</a></li>
-        <li><a href="#login" class="nav-link">Login</a></li>
-        <li><a href="#register" class="nav-link">Register</a></li>
-        <li><a href="#our" class="nav-link">Our Pet Keepers</a></li>
-      </ul>
-    </div>
-  </nav>
-  
-  <section class="about-us" id="about">
-  <div class="container">
-    <div class="about-content">
-      <h2>About Us</h2>
-      <br>
-      <p>Welcome to PetCare, where passion for pets meets unparalleled care. At PetCare, we understand the unique bond between pets and their owners, and we strive to create a nurturing environment that mirrors the love and devotion you have for your furry friends.</p>
-      <br><br>
-      <p>Our dedicated team of pet keepers is committed to providing the highest quality of care for your pets. Whether you're a pet owner seeking trustworthy and compassionate care for your beloved companions or a pet keeper looking to join our family, PetCare is the place where tails wag, and hearts melt.</p>
-      <br><br>
-      <p>Come be a part of our community, where every paw print tells a story, and every meow or bark is met with understanding and affection. PetCare is not just a service; it's a family that understands the language of love that transcends words. Join us on this journey of unconditional love, joy, and lifelong companionship.</p>
-    </div>
-  </div>
-</section>
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">PetCare</a>
+                <ul class="nav-list">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Us</a></li>
+                    <li><a href="#login" class="nav-link">Login</a></li>
+                    <li><a href="#register" class="nav-link">Register</a></li>
+                    <li><a href="#our" class="nav-link">Our Pet Keepers</a></li>
+                </ul>
+            </div>
+        </nav>
 
-  <!-- Login Form -->
-  <div id="login" class="login-container">
-    <form class="login-form">
-      <h2>Login</h2>
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" required>
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-  
-  <div id="register" class="container">
-    <div class="about-content">
-      <h2>Registration</h2>
-      <br><br>
-      <p>You can be a part of our team!</p>
-      <button class="button" onclick="showRegistrationForm()">Sign up</button>
-      <div id="showregister"></div>
-    </div>
-  </div>
-  
-    <div id="our" class="container">
-    <div class="about-content">
-      <h2>Our Pet Keepers</h2>
-      <br><br>
-      <p>See the full list of our dedicated and caring pet keepers.</p>
-      <br><br>
-      <button class="button" onclick="getAllPetKeepers()">Get All Pet Keepers</button>
-      <div id="petKeeperContent"></div>
-    </div>
-  </div>
+        <section class="about-us" id="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2>About Us</h2>
+                    <br>
+                    <p>Welcome to PetCare, where passion for pets meets unparalleled care. At PetCare, we understand the unique bond between pets and their owners, and we strive to create a nurturing environment that mirrors the love and devotion you have for your furry friends.</p>
+                    <br><br>
+                    <p>Our dedicated team of pet keepers is committed to providing the highest quality of care for your pets. Whether you're a pet owner seeking trustworthy and compassionate care for your beloved companions or a pet keeper looking to join our family, PetCare is the place where tails wag, and hearts melt.</p>
+                    <br><br>
+                    <p>Come be a part of our community, where every paw print tells a story, and every meow or bark is met with understanding and affection. PetCare is not just a service; it's a family that understands the language of love that transcends words. Join us on this journey of unconditional love, joy, and lifelong companionship.</p>
+                </div>
+            </div>
+        </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <p>&copy; 2024 PetCare. All rights reserved.  | Useful Links: <a href="https://www.i-pet.gr" target="_blank">i-pet.gr</a>, <a href="https://allaboutpets.gr/katoikidia-zoa-gia-mesa-sto-spiti/" target="_blank">allaboutpets.gr</a>, <a href="https://katoikidiazoa.gr" target="_blank">katoikidiazoa.gr</a>
-  </footer>
+        <!-- Login Form -->
+        <div id="login" class="login-container">
+            <form class="login-form">
+                <h2>Login</h2>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
 
-  
-  <script src="js/ajax.js"></script>
-</body>
+        <div id="register" class="container">
+            <div class="about-content">
+                <h2>Registration</h2>
+                <br><br>
+                <p>You can be a part of our team!</p>
+                <button class="button" onclick="showRegistrationForm()">Sign up</button>
+                <div id="showregister"></div>
+            </div>
+            <div>
+                <button onclick="location.href = 'PetKeeper/login/petkeeperlogin.html';">loginaskeeper</button>
+            </div>
+        </div>
+
+        <div id="our" class="container">
+            <div class="about-content">
+                <h2>Our Pet Keepers</h2>
+                <br><br>
+                <p>See the full list of our dedicated and caring pet keepers.</p>
+                <br><br>
+                <button class="button" onclick="getAllPetKeepers()">Get All Pet Keepers</button>
+                <div id="petKeeperContent"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 PetCare. All rights reserved.  | Useful Links: <a href="https://www.i-pet.gr" target="_blank">i-pet.gr</a>, <a href="https://allaboutpets.gr/katoikidia-zoa-gia-mesa-sto-spiti/" target="_blank">allaboutpets.gr</a>, <a href="https://katoikidiazoa.gr" target="_blank">katoikidiazoa.gr</a>
+        </footer>
+
+
+        <script src="js/ajax.js"></script>
+    </body>
 </html>

@@ -24,7 +24,9 @@ public class PetKeeper {
     public String getProperty() {
         return property;
     }
-
+    public int getId() {
+        return keeper_id;
+    }
     public void setProperty(String property) {
         this.property = property;
     }

@@ -47,7 +47,7 @@ function logout() {
             alert('Request failed. Returned status of ' + xhr.status);
         }
     };
-    xhr.open('POST', 'Logout');
+    xhr.open('POST', '../../Logout');
     xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
 }

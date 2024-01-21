@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,6 +39,46 @@ public class EditBookingsTable {
             Gson gson = new Gson();
             Booking bt = gson.fromJson(json, Booking.class);
             return bt;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public Booking databaseToBookingPetKeeper(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "'");
+            rs.next();
+            String json = DB_Connection.getResultsToJSON(rs);
+            Gson gson = new Gson();
+            Booking bt = gson.fromJson(json, Booking.class);
+            return bt;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public ArrayList<Booking> getBookings(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking bk = gson.fromJson(json, Booking.class);
+                bookings.add(bk);
+            }
+            return bookings;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
