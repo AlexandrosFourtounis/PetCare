@@ -1,0 +1,151 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #F5EEE6;
+  color: #333;
+}
+
+/* Navigation Bar styles */
+.navbar {
+  background-color: #FFF8E3;
+  padding: 10px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+/* Login Form styles */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.login-form {
+  background-color: #F3D7CA;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #333;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #E6A4B4;
+  color: #FFF;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Footer styles */
+.footer {
+  background-color: #FFF8E3;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* About Us Section styles */
+.about-content {
+  background-color: #FFF8E3;
+  margin-top: 20px;
+  text-align: left;
+  padding: 40px 20px;
+}
+
+/* Our Pet Keepers Section styles */
+#our {
+  background-color: #FFF8E3;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.our-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#petKeeperContent {
+  margin-top: 20px;
+}
+
+/* Registration Section styles */
+#register {
+  background-color: #F5EEE6;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.register-content {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+p {
+  color: #555;
+}
+
+
+
+
+
+
+
+

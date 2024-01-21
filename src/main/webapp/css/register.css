@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+
+/* Add this to your css/register.css file */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5eee6; /* Main background color */
+}
+
+.container {
+    background-color: #fff8e3; /* Container background color */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    padding: 30px;
+}
+
+.custom-heading {
+    color: #e6a4b4; /* Custom heading color */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+}
+
+.btn-primary {
+    background-color: #f3d7ca !important; /* Button primary background color */
+    border: none;
+    color: #e6a4b4 !important /* Button primary text color */
+}
+
+.btn-primary:hover {
+    background-color: #e6a4b4; /* Button primary hover background color */
+    color: #fff8e3; /* Button primary hover text color */
+}
+
+#verify {
+    margin-top: 10px;
+}
+
+/* Optional: Style for error message */
+#error {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Optional: Style for success message */
+#register {
+    color: green;
+    margin-top: 10px;
+}
+
+
+
+
