@@ -69,3 +69,32 @@ function createTableFromJSON(data) {
     return html;
 
 }
+
+function registerPet(){
+        let myForm = document.getElementById('petForm');
+        let formData = new FormData(myForm);
+        //formData.append = ('lat', lat);
+        //formData.append = ('lon', lon);
+        
+        const data = {};
+        formData.forEach((value, key) => (data[key] = value));
+        var jsonData = JSON.stringify(data);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function (){
+            if (xhr.readyState === 4 && xhr.status === 200){
+                const responseData = JSON.parse(xhr.responseText);
+                $('#ajaxContent').html("Successful Registration. Now please log in!<br> Your Data: " + jsonData);
+                //console.log('Success! ' + responseData['success'], 'success');
+                $('#petForm').hide();
+                //$('#ajaxContent').show();
+                
+            } else if (xhr.status !== 200){
+                document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
+                //$('#register').show();
+            }  
+        };
+    xhr.open('POST', '../../Register');
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
+};
