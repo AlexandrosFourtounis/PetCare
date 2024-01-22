@@ -40,6 +40,17 @@
         </nav>
 
         <div class="container mt-4" id="chatbox">
+            <form id="queryform">
+                <label for="query">Enter Text:</label>
+                <input type="text" id="query" name="query" >
+
+                <button type="button" onclick="gpt();return false;">Submit</button>
+
+                <hr>
+
+                <label for="result">Result:</label>
+                <input type="text" id="result" name="result" readonly>
+            </form>
 
         </div>
         <div id="ajaxContent"></div>

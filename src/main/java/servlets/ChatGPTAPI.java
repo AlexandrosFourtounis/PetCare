@@ -8,7 +8,7 @@ public class ChatGPTAPI {
 
     public static String chatGPT(String prompt) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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";
+        String apiKey = "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";
         String model = "gpt-3.5-turbo";
 
         try {
@@ -54,9 +54,9 @@ public class ChatGPTAPI {
 
     }
 
-//    public static void main(String[] args) {
-//
-//        System.out.println(chatGPT("hello, how are you? Can you tell me what's a Fibonacci Number?"));
-//
-//    }
+    public static void main(String[] args) {
+
+        System.out.println(chatGPT("hello, how are you? Can you tell me what's a Fibonacci Number?"));
+
+    }
 }
