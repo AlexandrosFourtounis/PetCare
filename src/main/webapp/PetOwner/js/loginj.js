@@ -20,7 +20,7 @@ function isLoggedIn() {
             $("#choices").load("buttons.html");
         }
     };
-    xhr.open('GET', '../../Login');
+    xhr.open('GET', '../../Loginowner');
     xhr.send();
 }
 
@@ -70,12 +70,33 @@ function createTableFromJSON(data) {
 
 }
 
+function Pet() {
+        // Fetching values from form inputs
+        var petBirthYear = document.getElementById("birthyear").value;
+        var petWeight = document.getElementById("weight").value;
+        var petPhoto = document.getElementById("photo").value;
+
+        // Checking conditions
+        if (parseInt(petBirthYear) <= 2000) {
+            alert("Error: Invalid birth year. Please enter a birth year greater than 2000.");
+            return false; // Prevent form submission
+        }
+
+        if (parseFloat(petWeight) <= 0) {
+            alert("Error: Invalid weight. Please enter a weight greater than 0.");
+            return false; // Prevent form submission
+        }
+
+        if (!petPhoto.startsWith("http")) {
+            alert("Error: The photo URL should start with 'http'.");
+            return false; // Prevent form submission
+        }
+    }
+
 function registerPet(){
         let myForm = document.getElementById('petForm');
         let formData = new FormData(myForm);
-        //formData.append = ('lat', lat);
-        //formData.append = ('lon', lon);
-        
+
         const data = {};
         formData.forEach((value, key) => (data[key] = value));
         var jsonData = JSON.stringify(data);
@@ -94,7 +115,8 @@ function registerPet(){
                 //$('#register').show();
             }  
         };
-    xhr.open('POST', '../../Register');
+    xhr.open('POST', '../../RegisterPet');
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(jsonData);
 };
+

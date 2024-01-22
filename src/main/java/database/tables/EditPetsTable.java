@@ -62,6 +62,28 @@ public class EditPetsTable {
         return null;
     }
 
+    public ArrayList<Pet> databaseToPetsId(int pet_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Pet> pets = new ArrayList<Pet>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM pets WHERE pet_id = '" + pet_id + "'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Pet pet = gson.fromJson(json, Pet.class);
+                pets.add(pet);
+            }
+            return pets;
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     
     public Pet petOfOwner(String id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
@@ -84,6 +106,24 @@ public class EditPetsTable {
         }
         return null;
     }
+
+    public boolean petExistsWithId(int pet_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ResultSet rs = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT * FROM pets WHERE pet_id = '" + pet_id + "'");
+            return rs.next(); // If rs.next() is true, a pet with the specified pet_id exists
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            stmt.close();
+            con.close();
+        }
+    }
+
     
     public ArrayList<Pet> databaseToPets(String type) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
