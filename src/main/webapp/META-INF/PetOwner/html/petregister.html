@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pet Registration Form</title>
+    <meta name="description" content="Form to register a pet">
+    <meta name="keywords" lang="en-us" content="web programming, CS, pet registration, form">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/register.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <div class="container pt-4">
+        <h2 class="custom-heading">Pet Registration Form</h2>
+        <form id="petForm" onsubmit="registerPet(); return false">
+            <!-- Pet Name -->
+            <div class="form-group">
+                <label for="pet_id">Pet Name</label>
+                <input type="text" class="form-control" id="pet_id" name="pet_id" required>
+            </div>
+            
+            <!-- Pet id -->
+            <div class="form-group">
+                <label for="petId">Pet Id</label>
+                <input type="text" class="form-control" id="petName" name="petName" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="pet">Pet Id</label>
+                <input type="text" class="form-control" id="petName" name="petName" required>
+            </div>
+
+            <!-- Pet Type -->
+            <div class="form-group">
+                <label for="petType">Pet Type</label>
+                <input type="text" class="form-control" id="petType" name="petType" required>
+            </div>
+
+            <!-- Pet Breed -->
+            <div class="form-group">
+                <label for="petBreed">Pet Breed</label>
+                <input type="text" class="form-control" id="petBreed" name="petBreed" required>
+            </div>
+
+            <!-- Pet Gender -->
+            <div class="form-group">
+                <label for="petGender">Pet Gender</label>
+                <select class="form-select" id="petGender" name="petGender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <!-- Pet Birth Year -->
+            <div class="form-group">
+                <label for="petBirthYear">Pet Birth Year</label>
+                <input type="number" class="form-control" id="petBirthYear" name="petBirthYear" required>
+            </div>
+
+            <!-- Pet Weight -->
+            <div class="form-group">
+                <label for="petWeight">Pet Weight</label>
+                <input type="number" class="form-control" id="petWeight" name="petWeight" required step="0.1">
+            </div>
+
+            <!-- Pet Description -->
+            <div class="form-group">
+                <label for="petDescription">Pet Description</label>
+                <textarea class="form-control" id="petDescription" name="petDescription" rows="3"></textarea>
+            </div>
+
+            <!-- Pet Photo -->
+            <div class="form-group">
+                <label for="petPhoto">Pet Photo (URL)</label>
+                <input type="text" class="form-control" id="petPhoto" name="petPhoto">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Register Pet</button>
+        </form>
+    </div>
+    <div id="ajaxContent"></div>
+    <!--Javascript-->
+    <script src="../js/loginj.js"></script>
+</body>
+
+</html>
+
