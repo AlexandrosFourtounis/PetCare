@@ -16,14 +16,14 @@ function getUser() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             $("#ajaxContent").html(createTableFromJSON(JSON.parse(xhr.responseText)));
-          //  $("#ajaxContent").html("Successful Login");
+            //  $("#ajaxContent").html("Successful Login");
         } else if (xhr.status !== 200) {
-             $("#ajaxContent").html("User not exists or incorrect password");
+            $("#ajaxContent").html("User not exists or incorrect password");
         }
     };
     var data = $('#loginForm').serialize();
-    xhr.open('GET', 'GetKeeper?'+data);
-    xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.open('GET', 'GetKeeper?' + data);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
     xhr.send();
 }
 
@@ -54,6 +54,6 @@ function createTableFromJSONkeepers(data) {
     return html;
 }
 
-function showRegistrationForm(){
-   window.open('html/register.html', '_blank');
+function showRegistrationForm() {
+    window.open('html/register.html', '_blank');
 }
