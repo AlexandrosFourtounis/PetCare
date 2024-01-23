@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Pet;
 import mainClasses.PetKeeper;
+import mainClasses.PetOwner;
 
 /**
  *
@@ -35,22 +36,35 @@ public class GetAvailablePetKeepers extends HttpServlet {
         if (session.getAttribute("loggedIn") != null) {
             try {
                 response.setStatus(200);
-                EditPetKeepersTable petKeepersTable = new EditPetKeepersTable();
-
-                // Fetch the pet type of the currently logged-in pet owner
+                EditPetOwnersTable petOwnersTable = new EditPetOwnersTable();
                 EditPetsTable petsTable = new EditPetsTable();
-                String ownerId = session.getAttribute("loggedIn").toString();
-                Pet petOfOwner = petsTable.petOfOwner(ownerId);
-                String petType = petOfOwner.getType();
 
-                // Retrieve available pet keepers based on pet type
-                ArrayList<PetKeeper> availablePetKeepers = petKeepersTable.getAvailableKeepersforOwner(petType);
+                String ownerUsername = session.getAttribute("loggedIn").toString();
+                PetOwner petOwner = petOwnersTable.databaseToPetOwnersUsername(ownerUsername);
 
-                Gson gson = new Gson();
-                String json = gson.toJson(availablePetKeepers);
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                response.getWriter().write(json);
+                if (petOwner != null) {
+                    Pet pet = petsTable.petOfOwnerfork(petOwner.getOwner_id());
+
+
+                    if (pet != null) {
+                        String petType = pet.getType();
+
+                        EditPetKeepersTable petKeepersTable = new EditPetKeepersTable();
+                        ArrayList<PetKeeper> availablePetKeepers = petKeepersTable.getAvailableKeepersforOwner(petType);
+
+                        Gson gson = new Gson();
+                        String json = gson.toJson(availablePetKeepers);
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write(json);
+                    } else {
+                        response.setStatus(500);
+                        response.getWriter().write("Pet information not found for the owner.");
+                    }
+                } else {
+                    response.setStatus(500);
+                    response.getWriter().write("Pet owner information not found.");
+                }
             } catch (SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(GetAvailablePetKeepers.class.getName()).log(Level.SEVERE, null, ex);
                 response.setStatus(500);
@@ -60,7 +74,6 @@ public class GetAvailablePetKeepers extends HttpServlet {
             response.setStatus(403);
             response.getWriter().write("Forbidden");
         }
-
     }
 
     /**

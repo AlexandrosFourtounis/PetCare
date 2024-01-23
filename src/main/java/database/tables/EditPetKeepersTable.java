@@ -151,7 +151,7 @@ public class EditPetKeepersTable {
             // Use prepared statement to avoid SQL injection
             String query = "SELECT * FROM `petKeepers` WHERE `keeper_id` NOT IN (SELECT `keeper_id` FROM `bookings` WHERE `status`='requested' OR `status`='accepted') AND ";
 
-            if ("all".equals(type)) {
+            if (type == null || "all".equals(type)) {
                 query += "1"; // Include all keepers
             } else if ("cat".equals(type)) {
                 query += "`catkeeper`='true'";
@@ -186,6 +186,7 @@ public class EditPetKeepersTable {
 
         return null;
     }
+
 
     
     

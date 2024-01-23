@@ -150,6 +150,9 @@ public class PetOwner {
         this.gender = gender;
     }
 
- 
+    public int getOwner_id() {
+
+        return owner_id;
+    }
     
 }
