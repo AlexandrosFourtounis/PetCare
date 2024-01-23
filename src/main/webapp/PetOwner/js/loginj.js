@@ -47,7 +47,7 @@ function logout() {
     var xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
-            window.location.href = "../../index.html";
+            
             $("#ajaxContent").html("Successful Logout");
         } else if (xhr.status !== 200) {
             alert('Request failed. Returned status of ' + xhr.status);
@@ -70,53 +70,4 @@ function createTableFromJSON(data) {
 
 }
 
-function Pet() {
-        // Fetching values from form inputs
-        var petBirthYear = document.getElementById("birthyear").value;
-        var petWeight = document.getElementById("weight").value;
-        var petPhoto = document.getElementById("photo").value;
-
-        // Checking conditions
-        if (parseInt(petBirthYear) <= 2000) {
-            alert("Error: Invalid birth year. Please enter a birth year greater than 2000.");
-            return false; // Prevent form submission
-        }
-
-        if (parseFloat(petWeight) <= 0) {
-            alert("Error: Invalid weight. Please enter a weight greater than 0.");
-            return false; // Prevent form submission
-        }
-
-        if (!petPhoto.startsWith("http")) {
-            alert("Error: The photo URL should start with 'http'.");
-            return false; // Prevent form submission
-        }
-    }
-
-function registerPet(){
-        let myForm = document.getElementById('petForm');
-        let formData = new FormData(myForm);
-
-        const data = {};
-        formData.forEach((value, key) => (data[key] = value));
-        var jsonData = JSON.stringify(data);
-        
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function (){
-            if (xhr.readyState === 4 && xhr.status === 200){
-                const responseData = JSON.parse(xhr.responseText);
-                $('#ajaxContent').html("Successful Registration. Now please log in!<br> Your Data: " + jsonData);
-                //console.log('Success! ' + responseData['success'], 'success');
-                $('#petForm').hide();
-                //$('#ajaxContent').show();
-                
-            } else if (xhr.status !== 200){
-                document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
-                //$('#register').show();
-            }  
-        };
-    xhr.open('POST', '../../RegisterPet');
-    xhr.setRequestHeader("Content-type", "application/json");
-    xhr.send(jsonData);
-};
 
