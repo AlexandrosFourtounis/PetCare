@@ -140,6 +140,53 @@ public class EditPetKeepersTable {
         }
         return null;
     }
+
+    public ArrayList<PetKeeper> getAvailableKeepersforOwner(String type) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetKeeper> keepers = new ArrayList<>();
+        ResultSet rs = null;
+
+        try {
+            // Use prepared statement to avoid SQL injection
+            String query = "SELECT * FROM `petKeepers` WHERE `keeper_id` NOT IN (SELECT `keeper_id` FROM `bookings` WHERE `status`='requested' OR `status`='accepted') AND ";
+
+            if ("all".equals(type)) {
+                query += "1"; // Include all keepers
+            } else if ("cat".equals(type)) {
+                query += "`catkeeper`='true'";
+            } else if ("dog".equals(type)) {
+                query += "`dogkeeper`='true'";
+            } else {
+                // Handle other types if needed
+                throw new IllegalArgumentException("Invalid pet type: " + type);
+            }
+
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                PetKeeper keeper = gson.fromJson(json, PetKeeper.class);
+                keepers.add(keeper);
+            }
+
+            return keepers;
+        } catch (Exception e) {
+            e.printStackTrace();  // Add this line to print the stack trace
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            stmt.close();
+            con.close();
+        }
+
+        return null;
+    }
+
     
     
     public ArrayList<PetKeeper> getKeepers(String type) throws SQLException, ClassNotFoundException {

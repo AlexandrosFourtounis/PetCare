@@ -72,6 +72,50 @@ function createTableFromJSON(data) {
     return html;
 
 }
+function createTableFromJSONkeepers(data) {
+    var html = "<table class='table'><thead><tr><th scope='col'>Keeper ID</th><th scope='col'>Email</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Birthdate</th><th scope='col'>Gender</th><th scope='col'>Country</th><th scope='col'>City</th><th scope='col'>Address</th><th scope='col'>Personal Page</th><th scope='col'>Job</th><th scope='col'>Telephone</th></tr></thead><tbody>";
+    for (var i = 0; i < data.length; i++) {
+        html += "<tr>";
+        html += "<th scope='row'>" + data[i].keeper_id + "</th>";
+        html += "<td>" + data[i].email + "</td>";
+        html += "<td>" + data[i].firstname + "</td>";
+        html += "<td>" + data[i].lastname + "</td>";
+        html += "<td>" + data[i].birthdate + "</td>";
+        html += "<td>" + data[i].gender + "</td>";
+        html += "<td>" + data[i].country + "</td>";
+        html += "<td>" + data[i].city + "</td>";
+        html += "<td>" + data[i].address + "</td>";
+        html += "<td>" + data[i].personalpage + "</td>";
+        html += "<td>" + data[i].job + "</td>";
+        html += "<td>" + data[i].telephone + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</tbody></table>";
+    return html;
+}
+
+
+function renderAvailablePetKeepers() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            // Assuming you have a div with id "availableKeepersContainer" to display the pet keepers
+
+            var availablePetKeepers = JSON.parse(xhr.responseText);
+            // Clear existing content
+            $("#seeavailable").html(createTableFromJSONkeepers(availablePetKeepers));
+
+        } else if (xhr.status !== 200) {
+            // Handle the error
+            document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
+        }
+    };
+    xhr.open('GET', '../../GetAvailablePetKeepers');
+    xhr.send();
+}
+
 
 function Pet() {
         // Fetching values from form inputs
