@@ -11,15 +11,15 @@ package mainClasses;
  * @author Mike
  */
 public class Booking {
-    int borrowing_id,owner_id,pet_id,keeper_id;
+    int booking_id, owner_id, pet_id, keeper_id;
     String fromDate,toDate,status;
     int price;
-    public int getBorrowing_id() {
-        return borrowing_id;
+    public int getBoooking_id() {
+        return booking_id;
     }
 
-    public void setBorrowing_id(int borrowing_id) {
-        this.borrowing_id = borrowing_id;
+    public void setBooking_id(int booking_id) {
+        this.booking_id = booking_id;
     }
 
     public int getOwner_id() {

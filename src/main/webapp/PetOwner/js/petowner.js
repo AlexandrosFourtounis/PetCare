@@ -167,3 +167,26 @@ function registerPet(){
     xhr.send(jsonData);
 };
 
+function makeBooking() {
+    let myForm = document.getElementById('petForm');
+    let formData = new FormData(myForm);
+
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    var jsonData = JSON.stringify(data);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = JSON.parse(xhr.responseText);
+            $('#ajaxContent').html("Successful Booking. Your Data: " + jsonData);
+            $('#petForm').hide();
+        } else if (xhr.status !== 200) {
+            document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
+        }
+    };
+
+    xhr.open('POST', '../../MakeBooking'); // Adjust the URL to match your servlet mapping
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
+};
