@@ -38,6 +38,7 @@ public class ChatGPTAPI {
             br.close();
 
             // calls the method to extract the message.
+            System.out.println(response.toString());
             return extractMessageFromJSONResponse(response.toString());
 
         } catch (IOException e) {
@@ -48,15 +49,11 @@ public class ChatGPTAPI {
     public static String extractMessageFromJSONResponse(String response) {
         int start = response.indexOf("content") + 11;
 
-        int end = response.indexOf("\"", start);
+        int end = response.indexOf("}", start);
+
 
         return response.substring(start, end);
 
     }
 
-    public static void main(String[] args) {
-
-        System.out.println(chatGPT("hello, how are you? Can you tell me what's a Fibonacci Number?"));
-
-    }
 }

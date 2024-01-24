@@ -39,17 +39,31 @@
             </div>
         </nav>
 
-        <div class="container mt-4" id="chatbox">
+        <div class="container mt-4 text-center"  id="chatbox">
             <form id="queryform">
-                <label for="query">Enter Text:</label>
-                <input type="text" id="query" name="query" >
-
-                <button type="button" onclick="gpt();return false;">Submit</button>
-
+                <label>Default questions</label>
+                <br>
+                <button id="default1" class="btn btn-primary mt-2" onclick="defaultGPT(1);return false;">How to take care of a dog?</button>
+                <br>
+                <button id="default2" class="btn btn-primary mt-2" onclick="defaultGPT(2);return false;">How to take care of a cat?</button>
+                <br>
+                <button id="default3" class="btn btn-primary mt-2" onclick="defaultGPT(3);return false;">Give me information about Labrador</button>
+                <br>
+                <button id="default4" class="btn btn-primary mt-2" onclick="defaultGPT(4);return false;">Give me information about ginger cat</button>
+                <br>
+                <div class="text-center mt-4">
+                    <label for="query">Enter a personalized question</label>
+                    <input type="text" id="query" name="query" class="form-control" placeholder="Your question">
+                </div>
+                <div class="text-center mt-2">
+                    <button type="button" class="btn btn-primary" onclick="gpt();return false;">Submit</button>
+                </div>
                 <hr>
 
-                <label for="result">Result:</label>
-                <input type="text" id="result" name="result" readonly>
+                <div class="text-center">
+                    <label for="results">Result:</label>
+                </div>
+                <textarea id="results" rows="5" class="form-control" placeholder="Result"></textarea>
             </form>
 
         </div>
