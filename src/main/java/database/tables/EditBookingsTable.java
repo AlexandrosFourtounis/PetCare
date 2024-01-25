@@ -117,7 +117,7 @@ public class EditBookingsTable {
                 + "  pet_id VARCHAR(10) not NULL, "
                 + " keeper_id INTEGER not NULL, "
                 + " fromDate DATE not NULL, "
-                + " fromDate DATE not NULL, "
+                + " toDate DATE not NULL, "
                 + " status VARCHAR(15) not NULL, "
                 + " price INTEGER not NULL, "
                 + "FOREIGN KEY (owner_id) REFERENCES petowners(owner_id), "

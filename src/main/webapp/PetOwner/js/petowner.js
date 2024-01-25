@@ -190,3 +190,56 @@ function makeBooking() {
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(jsonData);
 };
+
+function getOwnerBookingsDetails() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                var ownerBookings = JSON.parse(xhr.responseText);
+                console.log(ownerBookings);
+                // Assuming you have a div with id "ownerBookingsDetailsContainer" to display the details
+                $("#viewBooking").html(createTableFromJSONbookings(ownerBookings));
+            } else {
+                console.error('Error retrieving owner bookings details. Status: ' + xhr.status);
+            }
+        }
+    };
+    xhr.open('GET', '../GetBookingsOwner');
+    xhr.send();
+}
+
+function createTableFromJSONbookings(data) {
+    var html = "<table class='table'><thead><tr><th scope='col'>Booking ID</th><th scope='col'>Pet ID</th><th scope='col'>Keeper ID</th><th scope='col'>Status</th><th scope='col'>Price</th><th scope='col'>Actions</th></tr></thead><tbody>";
+    for (var i = 0; i < data.length; i++) {
+        html += "<tr>";
+        html += "<th scope='row'>" + data[i].booking_id + "</th>";
+        html += "<td>" + data[i].pet_id + "</td>";
+        html += "<td>" + data[i].keeper_id + "</td>";
+        html += "<td>" + data[i].status + "</td>";
+        html += "<td>" + data[i].price + "</td>";
+        // Add the "End Booking" button with an onclick event
+        html += "<td><button onclick='endBooking(" + data[i].booking_id + ")'>End Booking</button></td>";
+        html += "</tr>";
+    }
+    html += "</tbody></table>";
+    return html;
+}
+
+function endBooking(bookingId) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            // Optionally, update the UI or provide feedback upon successful booking end
+            alert('Booking ended successfully!');
+        } else if (xhr.status !== 200) {
+            // Handle the error
+            console.error('Error ending booking. Status: ' + xhr.status);
+        }
+    };
+
+    xhr.open('POST', '../GetBookingsOwner'); // Adjust the URL to match your servlet mapping
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.send('bookingId=' + bookingId);
+}
+

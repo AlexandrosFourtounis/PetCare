@@ -52,13 +52,18 @@
     <div class="container mt-4" id="bookingsContainer">
         <button class="button" onclick="redirectToOwnersBooking()">Make a booking</button>
         <div class="container mt-4" id="makeBooking">
-
     </div>
-    <div class="container mt-4" id="ajaxContent"></div> 
+        
+    <div class="container mt-4" id="bookings">
+        <button class="button" onclick="getOwnerBookingsDetails()">View your booking</button>
+    <div class="container mt-4" id="viewBooking">
+        
+    </div>
+    
+        <div class="container mt-4" id="ajaxContent"></div> 
 
     <script>
     function redirectToOwnersBooking() {
-        // Change the window location to the new HTML page
         window.location.href = 'html/ownersbooking.html';
     }
     </script>
