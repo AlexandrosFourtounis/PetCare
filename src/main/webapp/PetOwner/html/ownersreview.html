@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Booking Form</title>
+    <title>Review Form</title>
     <meta name="description" content="Form to register a pet">
     <meta name="keywords" lang="en-us" content="web programming, CS, pet registration, form">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,13 +16,12 @@
 
 <body>
     <div class="container pt-4">
-        <h2 class="custom-heading">Booking Form</h2>
-        <form id="petForm" onsubmit="makeBooking(); return false">
-            <!-- Pet Id -->
+        <h2 class="custom-heading">Review Form</h2>
+        <form id="petForm" onsubmit="makeReview(); return false">
             <div class="form-group">
-                <label for="pet_id">Pet Id</label>
-                <input type="text" class="form-control" id="pet_id" name="pet_id"
-                       minlength="10" maxlength="10" pattern="[0-9]+" required>
+                <label for="keeper_id">Keeper Id</label>
+                <input type="text" class="form-control" id="keeper_id" name="keeper_id"
+                        pattern="[0-9]+" required>
             </div>
             
             <!-- Owner id -->
@@ -33,32 +32,15 @@
             </div> 
             
             <div class="form-group">
-                <label for="keeper_id">Keeper Id</label>
-                <input type="text" class="form-control" id="keeper_id" name="keeper_id" 
-                   pattern="[0-9]+" required>
-            </div> 
+                <label for="reviewText">Review Text</label>
+                <input type="text" class="form-control" id="reviewText" name="reviewText" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reviewScore">Review Score</label>
+                <input type="number" class="form-control" id="reviewScore" name="reviewScore" required>
+            </div>
             
-            <div class="form-group">
-                <label for="fromdate">From Date</label>
-                <input type="date" class="form-control" id="fromdate" name="fromDate" required>
-            </div>
-
-            <div class="form-group">
-                <label for="todate">To Date</label>
-                <input type="date" class="form-control" id="todate" name="toDate" required>
-            </div>
-
-            <div class="form-group">
-                <label for="status">Status</label>
-                <input type="hidden" class="form-control" id="status" name="status" value="requested">
-            </div>
-
-
-            <div class="form-group">
-                <label for="price">Price</label>
-                <input type="number" class="form-control" id="price" name="price" required step="1">
-            </div>
-
             <!-- Submit Button -->
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

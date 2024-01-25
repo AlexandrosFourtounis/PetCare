@@ -42,13 +42,6 @@ public class GetBookingsOwner extends HttpServlet {
                 EditBookingsTable bookingsTable = new EditBookingsTable();
                 ArrayList<Booking> bookings = bookingsTable.getBookings(petOwner.getOwner_id());
 
-                // Print debug information
-                for (Booking booking : bookings) {
-                    System.out.println("Booking ID: " + booking.getBoooking_id());
-                    System.out.println("FromDate: " + booking.getFromDate());
-                    System.out.println("ToDate: " + booking.getToDate());
-                }
-
                 Gson gson = new Gson();
                 String json = gson.toJson(bookings);
                 response.setContentType("application/json");
