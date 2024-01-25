@@ -9,7 +9,7 @@ function isLoggedIn() {
         if (xhr.readyState === 4 && xhr.status === 200) {
 
             $("#ajaxContent").html("Welcome again" + xhr.responseText);
-
+            window.location.href = "../petkeeper.html";
         } else if (xhr.status !== 200) {
             $("#choices").load("buttons.html");
         }

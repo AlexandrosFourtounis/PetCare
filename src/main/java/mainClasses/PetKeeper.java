@@ -39,16 +39,16 @@ public class PetKeeper {
         this.propertydescription = propertydescription;
     }
 
-    public String getCatkeeper() {
-        return catkeeper;
+    public boolean getCatkeeper() {
+        return catkeeper.equals("true");
     }
 
     public void setCatkeeper(String catkeeper) {
         this.catkeeper = catkeeper;
     }
 
-    public String getDogkeeper() {
-        return dogkeeper;
+    public boolean getDogkeeper() {
+        return dogkeeper.equals("true");
     }
 
     public void setDogkeeper(String dogkeeper) {
@@ -87,7 +87,9 @@ public class PetKeeper {
         this.personalpage = personalpage;
     }
    
-    
+    public String getPersonalPage() {
+        return personalpage;
+    }
     public String getAddress() {
         return address;
     }

@@ -24,14 +24,11 @@ function renderBookings() {
     xhr.onload = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
             console.log(xhr.responseText);
-            // Assuming you have a div with id "bookingsContainer" to display the bookings
-
             bookings = JSON.parse(xhr.responseText);
-            // Clear existing content
             $("#bookingsContainer").html(createTableFromJSON(bookings));
 
         } else if (xhr.status !== 200) {
-            $("#choices").load("buttons.html");
+            $("#bookingsContainer").html("error retrieving bookings.");
         }
     };
     xhr.open('GET', '../GetBookings');
