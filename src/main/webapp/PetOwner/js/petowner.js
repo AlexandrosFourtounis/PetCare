@@ -72,8 +72,9 @@ function createTableFromJSON(data) {
     return html;
 
 }
+
 function createTableFromJSONkeepers(data) {
-    var html = "<table class='table'><thead><tr><th scope='col'>Keeper ID</th><th scope='col'>Email</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Birthdate</th><th scope='col'>Gender</th><th scope='col'>Country</th><th scope='col'>City</th><th scope='col'>Address</th><th scope='col'>Personal Page</th><th scope='col'>Job</th><th scope='col'>Telephone</th></tr></thead><tbody>";
+    var html = "<table class='table'><thead><tr><th scope='col'>Keeper ID</th><th scope='col'>Email</th><th scope='col'>First Name</th><th scope='col'>Last Name</th><th scope='col'>Birthdate</th><th scope='col'>Gender</th><th scope='col'>Country</th><th scope='col'>City</th><th scope='col'>Address</th><th scope='col'>Personal Page</th><th scope='col'>Job</th><th scope='col'>Telephone</th><th scope='col'>Caprice</th><th scope='col'>Dog Price</th></tr></thead><tbody>";
     for (var i = 0; i < data.length; i++) {
         html += "<tr>";
         html += "<th scope='row'>" + data[i].keeper_id + "</th>";
@@ -88,12 +89,15 @@ function createTableFromJSONkeepers(data) {
         html += "<td>" + data[i].personalpage + "</td>";
         html += "<td>" + data[i].job + "</td>";
         html += "<td>" + data[i].telephone + "</td>";
+        html += "<td>" + data[i].catprice + "</td>";
+        html += "<td>" + data[i].dogprice + "</td>";
         html += "</tr>";
     }
 
     html += "</tbody></table>";
     return html;
 }
+
 
 
 function renderAvailablePetKeepers() {
@@ -186,7 +190,7 @@ function makeBooking() {
         }
     };
 
-    xhr.open('POST', '../../MakeBooking'); // Adjust the URL to match your servlet mapping
+    xhr.open('POST', '../../MakeBooking'); 
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(jsonData);
 };
@@ -238,8 +242,110 @@ function endBooking(bookingId) {
         }
     };
 
-    xhr.open('POST', '../GetBookingsOwner'); // Adjust the URL to match your servlet mapping
+    xhr.open('POST', '../GetBookingsOwner'); 
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send('bookingId=' + bookingId);
 }
 
+function makeReview() {
+    let myForm = document.getElementById('petForm');
+    let formData = new FormData(myForm);
+
+    const data = {};
+    formData.forEach((value, key) => (data[key] = value));
+    var jsonData = JSON.stringify(data);
+
+    // Check if the booking status is finished
+    if (data['bookingStatus'] !== 'finished') {
+        alert('You can only write a review for a finished booking.');
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const responseData = JSON.parse(xhr.responseText);
+            $('#ajaxContent').html("Successful Review. Your Data: " + jsonData);
+            $('#petForm').hide();
+        } else if (xhr.status !== 200) {
+            document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
+        }
+    };
+
+    xhr.open('POST', '../../MakeReview'); 
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(jsonData);
+}
+
+
+var info;
+$(document).ready(function () {
+    getProfileInfo();
+    $("#applyChangesBtn").on("click", function () {
+        applyChanges();
+    });
+});
+
+function applyChanges() {
+    var updatedInfo = {
+        firstname: $("#firstname").val(),
+        lastname: $("#lastname").val(),
+        birthdate: $("#birthdate").val(),
+        gender: $("input[name='gender']:checked").val(),
+        country: $("#country").val(),
+        city: $("#city").val(),
+        address: $("#address").val(),
+        personalpage: $("#personalpage").val(),
+        job: $("#job").val(),
+        telephone: $("#telephone").val()
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("Profile updated successfully!");
+                var updatedData = JSON.parse(xhr.responseText);
+                $('#ajaxContent').html("Successful Update. Your Updated Data: " + JSON.stringify(updatedData));
+            } else {
+                console.error("Error updating profile:", xhr.statusText);
+                document.getElementById('ajaxContent').innerHTML = 'Request failed. Returned status of ' + xhr.status + "<br>";
+            }
+        }
+    };
+
+    xhr.open('POST', '../../OnwersProfile');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(updatedInfo));
+}
+
+
+function getProfileInfo() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+                var info = JSON.parse(xhr.responseText);
+
+                $("#username").val(info.username);
+                $("#email").val(info.email);
+                $("#firstname").val(info.firstname);
+                $("#lastname").val(info.lastname);
+                $("#birthdate").val(info.birthdate);
+                $("input[name='gender'][value='" + info.gender + "']").prop("checked", true);
+                $("#country").val(info.country.substring(0, 2).toUpperCase());
+                $("#city").val(info.city);
+                $("#address").val(info.address);
+                $("#personalpage").val(info.personalpage);
+                $("#job").val(info.job);
+                $("#telephone").val(info.telephone);
+                
+            } else {
+                $("#error").html("Error retrieving profile info. Status code: " + xhr.status);
+            }
+        }
+    };
+    xhr.open('GET', '../../OnwersProfile');
+    xhr.send();
+}
