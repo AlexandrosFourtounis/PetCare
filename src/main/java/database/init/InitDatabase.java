@@ -187,7 +187,7 @@ public class InitDatabase {
 
 //all reviews for a keeper
         EditReviewsTable ertab = new EditReviewsTable();
-        ArrayList<Review> revs = ertab.databaseTokeeperReviews("1");
+        ArrayList<Review> revs = ertab.databaseTokeeperReviews(1);
         Gson gson8 = new Gson();
         JsonArray jsonrevs = gson8.toJsonTree(revs).getAsJsonArray();
         System.out.println("Reviews for Keeper 1\n" + jsonrevs + "\n");

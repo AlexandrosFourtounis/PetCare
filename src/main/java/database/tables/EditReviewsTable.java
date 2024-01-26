@@ -44,7 +44,7 @@ public class EditReviewsTable {
    
     
     
-     public ArrayList<Review> databaseTokeeperReviews(String keeper_id) throws SQLException, ClassNotFoundException {
+    public ArrayList<Review> databaseTokeeperReviews(int keeper_id) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
         ArrayList<Review> revs=new ArrayList<Review>();

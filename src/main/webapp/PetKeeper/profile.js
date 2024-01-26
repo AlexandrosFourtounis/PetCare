@@ -1,6 +1,9 @@
 var info;
+
+var reviews;
 $(document).ready(function () {
     getProfileInfo();
+    renderReviews();
     $("#applyChangesBtn").on("click", function () {
         applyChanges();
     });
@@ -81,6 +84,38 @@ function getProfileInfo() {
         }
     };
     xhr.open('GET', '../GetProfileInfo');
+    xhr.send();
+}
+
+function createTableFromJSON(data) {
+    var html = "<table class='table'><thead><tr><th scope='col'>Review ID</th><th scope='col'>Owner ID</th><th scope='col'>Review Text</th><th scope='col'>Review Score</th></tr></thead><tbody>";
+    for (var i = 0; i < data.length; i++) {
+        html += "<tr>";
+        html += "<th scope='row'>" + data[i].review_id + "</th>";
+        html += "<td>" + "hidden" + "</td>";
+        html += "<td>" + data[i].reviewText + "</td>";
+        html += "<td>" + data[i].reviewScore + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</tbody></table>";
+    return html;
+}
+
+
+function renderReviews() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            reviews = JSON.parse(xhr.responseText);
+            $("#reviews").html(createTableFromJSON(reviews));
+
+        } else if (xhr.status !== 200) {
+            $("#reviews").html("error retrieving reviews.");
+        }
+    };
+    xhr.open('GET', '../GetReviews');
     xhr.send();
 }
 
