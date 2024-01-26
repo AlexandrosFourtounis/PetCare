@@ -32,7 +32,7 @@ public class KeepersList extends HttpServlet {
 
         try {
             EditPetKeepersTable edt = new EditPetKeepersTable();
-            ArrayList<PetKeeper> keepers = edt.getAvailableKeepers("all");
+            ArrayList<PetKeeper> keepers = edt.getKeepersUser("all");
 
             Gson gson = new Gson();
             String json = gson.toJson(keepers);

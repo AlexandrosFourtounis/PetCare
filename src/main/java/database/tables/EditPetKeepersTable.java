@@ -245,6 +245,35 @@ public class EditPetKeepersTable {
         }
         return null;
     }
+
+    public ArrayList<PetKeeper> getKeepersUser(String type) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetKeeper> keepers = new ArrayList<PetKeeper>();
+        ResultSet rs = null;
+        try {
+            if ("catkeeper".equals(type)) {
+                rs = stmt.executeQuery("SELECT * FROM petkeepers WHERE catkeeper= '" + "true" + "'");
+            } else if ("dogkeeper".equals(type)) {
+                rs = stmt.executeQuery("SELECT * FROM petkeepers WHERE dogkeeper= '" + "true" + "'");
+            } else if ("all".equals(type)) {
+                rs = stmt.executeQuery("SELECT * FROM `petKeepers` WHERE catkeeper = 'true' OR dogkeeper = 'true'");
+            }
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                PetKeeper keeper = gson.fromJson(json, PetKeeper.class);
+                keepers.add(keeper);
+            }
+            return keepers;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     
     
     public String databasePetKeeperToJSON(String username, String password) throws SQLException, ClassNotFoundException{
