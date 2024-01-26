@@ -18,7 +18,7 @@ public class PetKeeper {
     String telephone;
     String personalpage;
     String property,propertydescription;
-    String catkeeper,dogkeeper;
+    String catkeeper, dogkeeper;
     int catprice, dogprice;
 
     public String getProperty() {
@@ -39,16 +39,16 @@ public class PetKeeper {
         this.propertydescription = propertydescription;
     }
 
-    public boolean getCatkeeper() {
-        return catkeeper.equals("true");
+    public String getCatkeeper() {
+        return catkeeper;
     }
 
     public void setCatkeeper(String catkeeper) {
         this.catkeeper = catkeeper;
     }
 
-    public boolean getDogkeeper() {
-        return dogkeeper.equals("true");
+    public String getDogkeeper() {
+        return dogkeeper;
     }
 
     public void setDogkeeper(String dogkeeper) {

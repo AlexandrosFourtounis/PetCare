@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import mainClasses.PetKeeper;
 import database.DB_Connection;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,20 +52,47 @@ public class EditPetKeepersTable {
         stmt.executeUpdate(update);
     }
 
+//    public void updatePetKeeperInfo(String username, String firstname, String lastname, String birthdate, String gender,
+//            String country, String city, String address, String personalpage, String job, String telephone, String property,
+//            String propertydescription, boolean catkeeper, boolean dogkeeper, double catprice, double dogprice) throws SQLException, ClassNotFoundException {
+//        Connection con = DB_Connection.getConnection();
+//        Statement stmt = con.createStatement();
+//        String update = "UPDATE petkeepers SET firstname='" + firstname + "'AND lastname='"
+//                + lastname + "'AND birthdate='" + birthdate + "'AND gender='" + gender + "'AND country='" + country
+//                + "'AND city='" + city + "'AND address='" + address + "'AND personalpage='" + personalpage
+//                + "'AND job='" + job + "'AND telephone='" + telephone + "'AND property='" + property
+//                + "'AND propertydescription='" + propertydescription + "'AND catkeeper='" + catkeeper
+//                + "'AND dogkeeper='" + dogkeeper + "'AND catprice='" + catprice + "'AND dogprice='" + dogprice + "'WHERE username = '" + username + "  '";
+//        stmt.executeUpdate(update);
+//    }
+
     public void updatePetKeeperInfo(String username, String firstname, String lastname, String birthdate, String gender,
             String country, String city, String address, String personalpage, String job, String telephone, String property,
-            String propertydescription, boolean catkeeper, boolean dogkeeper, double catprice, double dogprice) throws SQLException, ClassNotFoundException {
+            String propertydescription, String catkeeper, String dogkeeper, double catprice, double dogprice) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
-        Statement stmt = con.createStatement();
-        String update = "UPDATE petkeepers SET firstname='" + firstname + "'AND lastname='"
-                + lastname + "'AND birthdate='" + birthdate + "'AND gender='" + gender + "'AND country='" + country
-                + "'AND city='" + city + "'AND address='" + address + "'AND personalpage='" + personalpage
-                + "'AND job='" + job + "'AND telephone='" + telephone + "'AND property='" + property
-                + "'AND propertydescription='" + propertydescription + "'AND catkeeper='" + catkeeper
-                + "'AND dogkeeper='" + dogkeeper + "'AND catprice='" + catprice + "'AND dogprice='" + dogprice + "'WHERE username = '" + username + "  '";
-        stmt.executeUpdate(update);
-    }
+        String update = "UPDATE petkeepers SET firstname=?, lastname=?, birthdate=?, gender=?, country=?, city=?, address=?, personalpage=?, job=?, telephone=?, property=?, propertydescription=?, catkeeper=?, dogkeeper=?, catprice=?, dogprice=? WHERE username=?";
+        try (PreparedStatement pstmt = con.prepareStatement(update)) {
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, birthdate);
+            pstmt.setString(4, gender);
+            pstmt.setString(5, country);
+            pstmt.setString(6, city);
+            pstmt.setString(7, address);
+            pstmt.setString(8, personalpage);
+            pstmt.setString(9, job);
+            pstmt.setString(10, telephone);
+            pstmt.setString(11, property);
+            pstmt.setString(12, propertydescription);
+            pstmt.setString(13, catkeeper);
+            pstmt.setString(14, dogkeeper);
+            pstmt.setDouble(15, catprice);
+            pstmt.setDouble(16, dogprice);
+            pstmt.setString(17, username);
 
+            pstmt.executeUpdate();
+        }
+    }
 
     public void printPetKeeperDetailsToPage(String username, String password) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();

@@ -7,8 +7,8 @@ package servlets;
 
 import com.google.gson.Gson;
 import database.tables.EditPetKeepersTable;
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import mainClasses.JSON_Converter;
 import mainClasses.PetKeeper;
 
 /**
@@ -31,14 +32,21 @@ public class UpdateProfileInfo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        JSON_Converter jc = new JSON_Converter();
+        String JSON = jc.getJSONFromAjax(request.getReader());
+
+        PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         if (session.getAttribute("loggedIn") != null) {
             try {
-                response.setStatus(200);
-                Gson gson = new Gson();
-                BufferedReader reader = request.getReader();
-                PetKeeper updatedPetKeeper = gson.fromJson(reader, PetKeeper.class);
-
                 EditPetKeepersTable petkeeperTable = new EditPetKeepersTable();
+                PetKeeper updatedPetKeeper = petkeeperTable.jsonToPetKeeper(JSON);
+
+                String JsonString = petkeeperTable.petKeeperToJSON(updatedPetKeeper);
+                System.out.println("pk from ajax is : " + JsonString + updatedPetKeeper.getFirstname() + session.getAttribute("loggedIn").toString());
+                response.setStatus(200);
+
                 petkeeperTable.updatePetKeeperInfo(
                         session.getAttribute("loggedIn").toString(),
                         updatedPetKeeper.getFirstname(),
@@ -58,6 +66,7 @@ public class UpdateProfileInfo extends HttpServlet {
                         updatedPetKeeper.getCatprice(),
                         updatedPetKeeper.getDogprice()
                 );
+                Gson gson = new Gson();
 
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");

@@ -22,6 +22,8 @@ function applyChanges() {
         catprice: $("#catprice").val(),
         dogprice: $("#dogprice").val(),
         propertydescription: $("#propertydescription").val(),
+        catkeeper: $("#catkeeper").prop("checked"),
+        dogkeeper: $("#dogkeeper").prop("checked")
 
     };
 
@@ -29,19 +31,47 @@ function applyChanges() {
     xhr.onload = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // Success, handle the response as needed
+
                 console.log("Profile updated successfully!");
+                $("#error").html("Succesfully updated the profile!");
             } else {
-                // Error updating profile
+                $("#error").html("Error updating profile info. ");
+                console.log("Response text: " + xhr.responseText);
                 console.error("Error updating profile:", xhr.statusText);
             }
         }
     };
 
-    xhr.open('POST', '../UpdateProfileInfo');  // Adjust the URL as needed
+    xhr.open('POST', '../UpdateProfileInfo');
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(updatedInfo));
 }
+
+//function applyChanges() {
+//    let myForm = document.getElementById('info');
+//    let formData = new FormData(myForm);
+//
+//    const data = {};
+//    formData.forEach((value, key) => (data[key] = value));
+//    var jsonData = JSON.stringify(data);
+//
+//    var xhr = new XMLHttpRequest();
+//    xhr.onload = function () {
+//        if (xhr.readyState === 4 && xhr.status === 200) {
+//            const responseData = JSON.parse(xhr.responseText);
+//            console.log("Profile updated successfully!");
+//            $("#error").html("Succesfully updated the profile!");
+//        } else if (xhr.status !== 200) {
+//            $("#error").html("Error updating profile info. ");
+//            console.log("Response text: " + xhr.responseText);
+//            console.error("Error updating profile:", xhr.statusText);
+//        }
+//    };
+//    xhr.open('POST', '../UpdateProfileInfo');
+//    xhr.setRequestHeader("Content-type", "application/json");
+//    xhr.send(jsonData);
+//}
+//;
 
 function getProfileInfo() {
     var xhr = new XMLHttpRequest();
@@ -67,9 +97,11 @@ function getProfileInfo() {
                 $("#catprice").val(info.catprice);
                 $("#dogprice").val(info.dogprice);
                 $("#propertydescription").val(info.propertydescription);
-
+                $("#catkeeper").prop("checked", info.catkeeper);
+                $("#dogkeeper").prop("checked", info.dogkeeper);
             } else {
                 $("#error").html("Error retrieving profile info. Status code: " + xhr.status);
+
             }
         }
     };
