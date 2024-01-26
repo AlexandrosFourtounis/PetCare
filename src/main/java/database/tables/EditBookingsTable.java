@@ -86,6 +86,28 @@ public class EditBookingsTable {
         return null;
     }
 
+    public ArrayList<Booking> getBookingsFinished(int id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Booking> bookings = new ArrayList<Booking>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM bookings WHERE keeper_id= '" + id + "'AND status='finished'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Booking bk = gson.fromJson(json, Booking.class);
+                bookings.add(bk);
+            }
+            return bookings;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
+
     public Booking jsonToBooking(String json) {
         Gson gson = new Gson();
         Booking r = gson.fromJson(json, Booking.class);

@@ -1,13 +1,41 @@
 var info;
-
+var stats;
 var reviews;
 $(document).ready(function () {
     getProfileInfo();
     renderReviews();
+    renderStats();
     $("#applyChangesBtn").on("click", function () {
         applyChanges();
     });
 });
+function renderStats() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            stats = JSON.parse(xhr.responseText);
+            $("#stats").html(createTableFromJSONs(stats));
+
+        } else if (xhr.status !== 200) {
+            $("#stats").html("error retrieving stats.");
+        }
+    };
+    xhr.open('GET', '../GetStats');
+    xhr.send();
+}
+function createTableFromJSONs(data) {
+    var html = "<table class='table'><thead><tr><th scope='col'>Total Bookings</th><th scope='col'>Total no. days pets were kept</th><th scope='col'>Total Reviews</th></tr></thead><tbody>";
+
+    html += "<tr>";
+    html += "<th scope='row'>" + data.total_bookings + "</th>";
+    html += "<td>" + data.total_days + "</td>";
+    html += "<td>" + data.total_reviews + "</td>";
+    html += "</tr>";
+
+    html += "</tbody></table>";
+    return html;
+}
 
 function applyChanges() {
     var updatedInfo = {
