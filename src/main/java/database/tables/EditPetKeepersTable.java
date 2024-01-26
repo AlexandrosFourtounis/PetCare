@@ -52,19 +52,6 @@ public class EditPetKeepersTable {
         stmt.executeUpdate(update);
     }
 
-//    public void updatePetKeeperInfo(String username, String firstname, String lastname, String birthdate, String gender,
-//            String country, String city, String address, String personalpage, String job, String telephone, String property,
-//            String propertydescription, boolean catkeeper, boolean dogkeeper, double catprice, double dogprice) throws SQLException, ClassNotFoundException {
-//        Connection con = DB_Connection.getConnection();
-//        Statement stmt = con.createStatement();
-//        String update = "UPDATE petkeepers SET firstname='" + firstname + "'AND lastname='"
-//                + lastname + "'AND birthdate='" + birthdate + "'AND gender='" + gender + "'AND country='" + country
-//                + "'AND city='" + city + "'AND address='" + address + "'AND personalpage='" + personalpage
-//                + "'AND job='" + job + "'AND telephone='" + telephone + "'AND property='" + property
-//                + "'AND propertydescription='" + propertydescription + "'AND catkeeper='" + catkeeper
-//                + "'AND dogkeeper='" + dogkeeper + "'AND catprice='" + catprice + "'AND dogprice='" + dogprice + "'WHERE username = '" + username + "  '";
-//        stmt.executeUpdate(update);
-//    }
 
     public void updatePetKeeperInfo(String username, String firstname, String lastname, String birthdate, String gender,
             String country, String city, String address, String personalpage, String job, String telephone, String property,

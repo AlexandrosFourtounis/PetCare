@@ -47,31 +47,6 @@ function applyChanges() {
     xhr.send(JSON.stringify(updatedInfo));
 }
 
-//function applyChanges() {
-//    let myForm = document.getElementById('info');
-//    let formData = new FormData(myForm);
-//
-//    const data = {};
-//    formData.forEach((value, key) => (data[key] = value));
-//    var jsonData = JSON.stringify(data);
-//
-//    var xhr = new XMLHttpRequest();
-//    xhr.onload = function () {
-//        if (xhr.readyState === 4 && xhr.status === 200) {
-//            const responseData = JSON.parse(xhr.responseText);
-//            console.log("Profile updated successfully!");
-//            $("#error").html("Succesfully updated the profile!");
-//        } else if (xhr.status !== 200) {
-//            $("#error").html("Error updating profile info. ");
-//            console.log("Response text: " + xhr.responseText);
-//            console.error("Error updating profile:", xhr.statusText);
-//        }
-//    };
-//    xhr.open('POST', '../UpdateProfileInfo');
-//    xhr.setRequestHeader("Content-type", "application/json");
-//    xhr.send(jsonData);
-//}
-//;
 
 function getProfileInfo() {
     var xhr = new XMLHttpRequest();
