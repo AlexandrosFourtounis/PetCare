@@ -50,7 +50,32 @@ public class EditPetOwnersTable {
         stmt.executeUpdate(update);
     }
    
-    
+    public void updatePetOwnerInfo(String username, String firstname, String lastname, String birthdate, String gender,
+            String country, String city, String address, String personalpage, String job, String telephone)
+            throws SQLException, ClassNotFoundException {
+        Connection con = null;
+        Statement stmt = null;
+
+        try {
+            con = DB_Connection.getConnection();
+            stmt = con.createStatement();
+            String update = "UPDATE petowners SET firstname='" + firstname + "', lastname='"
+                    + lastname + "', birthdate='" + birthdate + "', gender='" + gender + "', country='" + country
+                    + "', city='" + city + "', address='" + address + "', personalpage='" + personalpage
+                    + "', job='" + job + "', telephone='" + telephone + "' WHERE username = '" + username + "'";
+            stmt.executeUpdate(update);
+        } finally {
+            // Close resources in a finally block
+            if (stmt != null) {
+                stmt.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+    }
+
+
     public PetOwner databaseToPetOwners(String username, String password) throws SQLException, ClassNotFoundException{
          Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();

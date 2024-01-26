@@ -79,16 +79,15 @@ public class GetBookingsOwner extends HttpServlet {
                 EditBookingsTable bookingsTable = new EditBookingsTable();
                 bookingsTable.updateBooking(bookingID, "finished");
 
-                // Optionally, provide a response indicating success
                 response.setStatus(200);
                 response.getWriter().write("Booking ended successfully!");
             } catch (NumberFormatException | SQLException | ClassNotFoundException ex) {
                 Logger.getLogger(GetBookingsOwner.class.getName()).log(Level.SEVERE, null, ex);
-                response.setStatus(500); // Internal Server Error
+                response.setStatus(500);
                 response.getWriter().write("Error ending booking: " + ex.getMessage());
             }
         } else {
-            response.setStatus(400); // Bad Request
+            response.setStatus(400);
             response.getWriter().write("Invalid parameters");
         }
     }
