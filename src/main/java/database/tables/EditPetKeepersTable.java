@@ -387,7 +387,7 @@ public class EditPetKeepersTable {
     public void deletePetKeeper(int username) throws SQLException, ClassNotFoundException {
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
-        String update = "DELETE FROM petkeepers WHERE keeper_id = '" + username + "'";
+        String update = "DELETE FROM petkeepers WHERE username = '" + username + "'";
         stmt.executeUpdate(update);
     }
 

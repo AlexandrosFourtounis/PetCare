@@ -1,6 +1,13 @@
 var bookings;
 function createTableFromJSON(data) {
-    var html = "<table class='table'><thead><tr><th scope='col'>Booking ID</th><th scope='col'>Owner ID</th><th scope='col'>Pet ID</th><th scope='col'>Keeper ID</th><th scope='col'>Status</th><th scope='col'>Price</th></tr></thead><tbody>";
+    var html = "<table class='table'><thead><tr><th scope='col'>Booking ID</th><th scope='col'>Owner ID</th><th scope='col'>Pet ID</th><th scope='col'>Keeper ID</th><th scope='col'>Status</th><th scope='col'>Price</th>";
+
+
+    html += "<th scope='col'>Actions</th>";
+
+
+    html += "</tr></thead><tbody>";
+
     for (var i = 0; i < data.length; i++) {
         html += "<tr>";
         html += "<th scope='row'>" + data[i].booking_id + "</th>";
@@ -9,6 +16,16 @@ function createTableFromJSON(data) {
         html += "<td>" + data[i].keeper_id + "</td>";
         html += "<td>" + data[i].status + "</td>";
         html += "<td>" + data[i].price + "</td>";
+
+        if (data[i].status === "requested") {
+            html += "<td>";
+            html += "<button onclick='acceptBooking(" + data[i].booking_id + ")'>Accept</button>";
+            html += "<button onclick='declineBooking(" + data[i].booking_id + ")'>Decline</button>";
+            html += "</td>";
+        } else {
+            html += "<td></td>";
+        }
+
         html += "</tr>";
     }
 
@@ -16,6 +33,51 @@ function createTableFromJSON(data) {
     return html;
 }
 var accepted;
+
+function acceptBooking(bookingId) {
+    console.log("Accept booking with ID: " + bookingId);
+    var info = {
+        booking_id: bookingId
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("booking accepted succesfully");
+            } else {
+                console.log("Response text: " + xhr.responseText);
+            }
+        }
+    };
+
+    xhr.open('POST', '../AcceptBooking');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(info));
+
+}
+
+function declineBooking(bookingId) {
+    console.log("Accept booking with ID: " + bookingId);
+    var info = {
+        booking_id: bookingId
+    };
+
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                console.log("booking declined succesfully");
+            } else {
+                console.log("Response text: " + xhr.responseText);
+            }
+        }
+    };
+
+    xhr.open('POST', '../DeclineBooking');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(info));
+}
 
 function createTableFromJSONa(data) {
     var html = "<table class='table'><thead><tr><th scope='col'>Booking ID</th><th scope='col'>Pet ID</th><th scope='col'>Status</th><th scope='col'>Message</th><th scope='col'>Send</th><th scope='col'>Other User's Response</th></tr></thead><tbody>";

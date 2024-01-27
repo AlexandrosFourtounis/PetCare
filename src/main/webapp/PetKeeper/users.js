@@ -1,4 +1,9 @@
-
+var no_owners;
+var no_keepers;
+var no_cats;
+var no_dogs;
+var sum_app;
+var sum_keepers;
 function createTableFromJSON(data) {
     var html = "<table class='table'><thead><tr><th scope='col'>User ID</th><th scope='col'>Type</th><th scope='col'>First Name</th><th scope='col'>username</th></tr></thead><tbody>";
     for (var i = 0; i < data.length; i++) {
@@ -12,6 +17,7 @@ function createTableFromJSON(data) {
     }
 
     html += "</tbody></table>";
+    no_keepers = i;
     return html;
 }
 
@@ -28,6 +34,7 @@ function createTableFromJSONa(data) {
     }
 
     html += "</tbody></table>";
+    no_owners = i;
     return html;
 }
 var users;
@@ -35,7 +42,7 @@ var users;
 $(document).ready(function () {
     renderUsers();
     renderOwners();
-
+    getDogs();
     $("#bookingsContainer, #ownersContainer").on("click", ".delete-btn", function () {
         var userId = $(this).data("user-id");
         var userType = $(this).data("user-type");
@@ -87,5 +94,32 @@ function renderOwners() {
         }
     };
     xhr.open('GET', '../GetUsersOwners');
+    xhr.send();
+}
+
+
+function getDogs() {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log(xhr.responseText);
+            var temp = JSON.parse(xhr.responseText);
+            no_dogs = temp.no_dogs;
+            no_cats = temp.no_cats;
+            sum_app = temp.sum_app;
+            sum_keepers = temp.sum_keepers;
+            console.log("no dogs = " + no_dogs + " no_cats == " + no_cats);
+            console.log("no keepers = " + no_keepers + " owners == " + no_owners);
+            document.getElementById("hidden_dogs").value = no_dogs;
+            document.getElementById("hidden_cats").value = no_cats;
+            document.getElementById("hidden_keepers").value = no_keepers;
+            document.getElementById("hidden_owners").value = no_owners;
+            document.getElementById("hidden_sum_app").value = sum_app;
+            document.getElementById("hidden_sum_keepers").value = sum_keepers;
+        } else if (xhr.status !== 200) {
+            $("#ownersContainer").html("error getting dogs.");
+        }
+    };
+    xhr.open('GET', '../GetDogs');
     xhr.send();
 }
