@@ -383,6 +383,14 @@ public class EditPetKeepersTable {
         }
         return null;
     }
+
+    public void deletePetKeeper(int username) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String update = "DELETE FROM petkeepers WHERE keeper_id = '" + username + "'";
+        stmt.executeUpdate(update);
+    }
+
     /**
      * Establish a database connection and add in the database.
      *

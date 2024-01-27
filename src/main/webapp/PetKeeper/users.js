@@ -44,15 +44,20 @@ $(document).ready(function () {
 });
 
 function deleteUser(userId, userType) {
-    // Implement your logic to delete the user
-    // You can use AJAX to send a request to the server to delete the user
-    console.log("Delete user with ID " + userId + " of type " + userType);
-    // Make an AJAX request to delete the user using userId and userType
-    // ...
 
-    // After successful deletion, you may want to re-render the tables
-    renderUsers();
-    renderOwners();
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Delete user with ID " + userId + " of type " + userType);
+            renderUsers();
+            renderOwners();
+        } else if (xhr.status !== 200) {
+            $("#error").html("error retrieving users.");
+        }
+    };
+    xhr.open('POST', '../DeleteUsers?userId=' + userId + '&userType=' + userType);
+    xhr.send();
+
 }
 
 function renderUsers() {

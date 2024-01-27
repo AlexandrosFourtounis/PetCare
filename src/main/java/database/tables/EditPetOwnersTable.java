@@ -71,6 +71,13 @@ public class EditPetOwnersTable {
         String update="UPDATE petowners SET personalpage='"+personalpage+"' WHERE username = '"+username+"'";
         stmt.executeUpdate(update);
     }
+
+    public void deletePetOwner(int username) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        String update = "DELETE FROM petowners WHERE owner_id = '" + username + "'";
+        stmt.executeUpdate(update);
+    }
    
     public void updatePetOwnerInfo(String username, String firstname, String lastname, String birthdate, String gender,
             String country, String city, String address, String personalpage, String job, String telephone)
