@@ -35,7 +35,6 @@ import mainClasses.Review;
 @WebServlet(name = "GetStats", urlPatterns = {"/GetStats"})
 public class GetStats extends HttpServlet {
 
-    // Helper method to calculate the total number of days a pet was kept
    private int calculateTotalDays(ArrayList<Booking> bookings) {
         if (bookings.isEmpty()) {
             return 0;

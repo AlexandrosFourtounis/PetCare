@@ -217,7 +217,27 @@ public class EditPetKeepersTable {
         return null;
     }
 
+    public ArrayList<PetKeeper> getAllKeepers() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetKeeper> keepers = new ArrayList<PetKeeper>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM petkeepers");
 
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                PetKeeper keeper = gson.fromJson(json, PetKeeper.class);
+                keepers.add(keeper);
+            }
+            return keepers;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
     
     
     public ArrayList<PetKeeper> getKeepers(String type) throws SQLException, ClassNotFoundException {

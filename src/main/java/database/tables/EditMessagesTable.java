@@ -12,10 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mainClasses.Message;
-import mainClasses.Pet;
 
 /**
  *
@@ -57,6 +57,28 @@ public class EditMessagesTable {
             return messages;
             
            
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+
+        }
+        return null;
+    }
+
+    public ArrayList<Message> msgs(int booking_id) throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<Message> messages = new ArrayList<Message>();
+        ResultSet rs;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM messages WHERE booking_id= '" + booking_id + "'AND sender='owner'");
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                Message msg = gson.fromJson(json, Message.class);
+                messages.add(msg);
+            }
+            return messages;
+
         } catch (Exception e) {
             System.err.println("Got an exception! ");
 
@@ -112,6 +134,10 @@ public class EditMessagesTable {
         } catch (SQLException ex) {
             Logger.getLogger(EditMessagesTable.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public ArrayList<Message> getMessagesForBookings(int id, List<Integer> bookingIds) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

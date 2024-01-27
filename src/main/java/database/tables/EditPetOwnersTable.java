@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,7 +43,28 @@ public class EditPetOwnersTable {
     }
     
    
-    
+    public ArrayList<PetOwner> getAllOwners() throws SQLException, ClassNotFoundException {
+        Connection con = DB_Connection.getConnection();
+        Statement stmt = con.createStatement();
+        ArrayList<PetOwner> keepers = new ArrayList<PetOwner>();
+        ResultSet rs = null;
+        try {
+            rs = stmt.executeQuery("SELECT * FROM petowners");
+
+            while (rs.next()) {
+                String json = DB_Connection.getResultsToJSON(rs);
+                Gson gson = new Gson();
+                PetOwner keeper = gson.fromJson(json, PetOwner.class);
+                keepers.add(keeper);
+            }
+            return keepers;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return null;
+    }
+
     public void updatePetOwner(String username,String personalpage) throws SQLException, ClassNotFoundException{
         Connection con = DB_Connection.getConnection();
         Statement stmt = con.createStatement();
@@ -148,6 +170,7 @@ public class EditPetOwnersTable {
         }
         return null;
     }
+
 
      public void createPetOwnersTable() throws SQLException, ClassNotFoundException {
 
