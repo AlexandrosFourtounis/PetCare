@@ -39,16 +39,21 @@
         </section>
 
         <!-- Login Form -->
+        <!-- Login Form -->
         <div id="login" class="login-container">
             <form class="login-form">
                 <h2>Login</h2>
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Login</button>
+                <br>
+                <div>
+                    <button type="button" onclick="location.href = 'PetOwner/html/pologin.html';">loginasowner</button>
+                </div>
+                <br>
+                <div>
+                    <button type="button" onclick="location.href = 'PetKeeper/login/petkeeperlogin.html';">loginaskeeper</button>
+                </div>
             </form>
         </div>
+
 
         <div id="register" class="container">
             <div class="about-content">
@@ -58,16 +63,10 @@
                 <button class="button" onclick="showRegistrationForm()">Sign up</button>
                 <div id="showregister"></div>
             </div>
-            <div>
-                <button onclick="location.href = 'PetOwner/html/pologin.html';">loginasowner</button>
-            </div>
-            <div>
-                <button onclick="location.href = 'PetKeeper/login/petkeeperlogin.html';">loginaskeeper</button>
-            </div>
         </div>
 
         <div id="our" class="container">
-            <div class="about-content">
+            <div class="our-content">
                 <h2>Our Pet Keepers</h2>
                 <br><br>
                 <p>See the full list of our dedicated and caring pet keepers.</p>
