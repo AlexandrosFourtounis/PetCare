@@ -1,6 +1,42 @@
-﻿# Team
+# Pet Care
 
-Georgia Marina Tsanta, 5020, csd5020@csd.uoc.gr
-Alexandros Fourtounis, 5031, csd5031@csd.uoc.gr
+Pet Care is a web application project made for the needs of CS-359, 2023-2024 at the Computer Science department, University of Crete.
+
+It is a web app which aims to let people (pet owners) leave their pets to accredited pet keepers to take care of them.
+
+The project description can be found in the ΗΥ-359_Project_2023_2024.docx (in greek).
+
+## Features
+* ChatGPT API use for the pet keepers so that they can get help about particular pets.
+* Review system : pet owners can leave reviews about pet keepers (only if there exists a finished booking).
+* Messages : pet owners can message pet keepers and vice-versa (not implemented).
+* Bookings system : pet owners can make bookings and pet keepers can accept,decline and see the bookings.
+* Lots more!
+
+## Installation
+* Donwload XAMPP and start Apache, MySQL and Tomcat.
+* Open folder in Netbeans or other IDE.
+* Compile project and run.
+
+## Authors
+This project was made in collaboration with [Georgia Tsanta](https://github.com/georgiats0).
+> Sections made by Georgia Tsanta: 
+> * Pet Owner
+> * Guest user
+
+> Sections made by me:
+> * Administrator
+> * Pet Keeper
 
 
+## Credits
+The project was made for the needs of CS-359 and our lecturer [Dr. Michalis Mounantonakis](http://users.ics.forth.gr/~mountant/).
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
